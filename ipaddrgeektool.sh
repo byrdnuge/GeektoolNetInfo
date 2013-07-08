@@ -1,11 +1,13 @@
 #!/bin/sh
-#I got tired of trying to fix my geektools ip scripts and reading others people scripts so I made my own ... with comments
+#I got tired of trying to fix my geektools ip scripts and reading others people made to figure out how #to tweak it, with no comments. So .... I just wrote one .... enjoy.
 #get external ip
 external=$(curl -s www.icanhazip.com | awk {'print $1'})
 #Check Ethernet and Wifi/Airport for ipv4 internal addresses
 internal0=$(ifconfig en5 | grep "inet" | grep -v 127.0.0.1 | grep -v inet6 | cut -d ' ' -f 2)
 internal1=$(ifconfig en1 | grep "inet" | grep -v 127.0.0.1 | grep -v inet6 | cut -d ' ' -f 2)
 internal8=$(ifconfig en8 | grep "inet" | grep -v 127.0.0.1 | grep -v inet6 | cut -d ' ' -f 2)
+internal9=$(ifconfig en3 | grep "inet" | grep -v 127.0.0.1 | grep -v inet6 | cut -d ' ' -f 2)
+internal10=$(ifconfig en2 | grep "inet" | grep -v 127.0.0.1 | grep -v inet6 | cut -d ' ' -f 2)
 #Check Eth, and Wifi/Airport for ipv6 addresses
 internal2=$(ifconfig en5 | grep "inet6" | grep -v fe80:: | cut -d " " -f 2)
 internal3=$(ifconfig en1 | grep "inet6" | grep -v fe80:: | cut -d " " -f 2)
@@ -30,6 +32,12 @@ if [ "${internal1}" != "" ]; then
 fi
 if [ "${internal8}" != "" ]; then
     echo "DeskUSBEth : ${internal8}"
+fi
+if [ "${internal9}" != "" ]; then
+    echo "USBEth : ${internal9}"
+fi
+if [ "${internal10}" != "" ]; then
+    echo "USBEth : ${internal10}"
 fi
 #display ipv6 from wifi, ethernet or both
 if [ "${internal2}" != "" ]; then
