@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #I got tired of trying to fix my geektools ip scripts and reading others people made to figure out how #to tweak it, with no comments. So .... I just wrote one, compiled from some I found with a little extra of my own. .... enjoy.
 #get external ip
 external=$(curl -s www.icanhazip.com | awk {'print $1'})
