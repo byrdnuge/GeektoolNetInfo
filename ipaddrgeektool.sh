@@ -14,6 +14,7 @@ internal3=$(ifconfig en1 | grep "inet6" | grep -v fe80:: | cut -d " " -f 2)
 #Get VPN, and and Virtual Interfaces
 vpn0=$( ifconfig ppp0 |grep "inet" | grep -v 127.0.0.1 | cut -d " " -f 2)
 vmnic0=$( ifconfig vnic0 | grep "inet" | grep -v inet6 |cut -d " " -f 2)
+vpn1=$(ifconfig utun1 | grep inet | cut -d ' ' -f 2)
 #Get VlanID and Vlan IP
 vlan0=$(ifconfig vlan0 | grep "vlan:" | cut -d " " -f 2 )
 vlan0ip=$(ifconfig vlan0 | grep "inet" | grep -v inet6 |cut -d " " -f 2)
@@ -60,5 +61,8 @@ fi
 if [ "${vlan1ip}" != "" ]; then
         echo "${vlan1}: ${vlan1ip}"
 fi
-
+if	[ "${vpn1}" != "" ] ; then
+		echo "MicrosofVPN:${vpn1}"
+fi
+ 
 
