@@ -2,7 +2,7 @@
 #I got tired of trying to fix my geektools ip scripts and reading others people made to figure out how #to tweak it, with no comments. So .... I just wrote one, compiled from some I found with a little extra of my own. .... enjoy.
 #get external ip
 external=$(curl -s www.icanhazip.com | awk {'print $1'})
-#Check Ethernet and Wifi/Airport for ipv4 internal addresses
+#Check Ethernet and Wifi/Airport/WWAN for ipv4 internal addresses
 internal0=$(ifconfig en5 | grep "inet" | grep -v 127.0.0.1 | grep -v inet6 | cut -d ' ' -f 2)
 internal1=$(ifconfig en1 | grep "inet" | grep -v 127.0.0.1 | grep -v inet6 | cut -d ' ' -f 2)
 internal8=$(ifconfig en8 | grep "inet" | grep -v 127.0.0.1 | grep -v inet6 | cut -d ' ' -f 2)
@@ -26,7 +26,7 @@ echo "External : ${external}"
 #display Internal ipv4 from wifi, ethernet or both
 
 if [ "${internal0}" != "" ]; then
-    echo "Ethernet : ${internal0}"
+    echo "WWANLTE : ${internal0}"
 fi
 if [ "${internal1}" != "" ]; then
     echo "${ssid} : ${internal1}"
