@@ -21,6 +21,8 @@ vlan0ip=$(ifconfig vlan0 | grep "inet" | grep -v inet6 |cut -d " " -f 2)
 vlan1=$(ifconfig vlan1 | grep "vlan:" | cut -d " " -f 2 )
 vlan1ip=$(ifconfig vlan1 | grep "inet" | grep -v inet6 |cut -d " " -f 2)
 ssid=$(networksetup -getairportnetwork en1 | awk -F": " '{print $2}')
+gateway=$(route -n get default | grep gateway | cut -d ':' -f 2)
+
 #display external
 echo "External : ${external}"
 #display Internal ipv4 from wifi, ethernet or both
@@ -64,5 +66,6 @@ fi
 if	[ "${vpn1}" != "" ] ; then
 		echo "MicrosofVPN:${vpn1}"
 fi
- 
-
+if	[ "{gateway}" != "" ]; then
+		echo "Default $gateway"
+fi
